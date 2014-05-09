@@ -9,33 +9,7 @@ DT <- with(hpc1, paste(Date, Time, sep=","))
 DT <- strptime(DT, "%d/%m/%Y,%H:%M:%S")
 hpc1$DT <- DT
 
-d1 <- subset(hpc1, as.character(Date) == "1/2/2007"|as.character(Date) == "2/2/2007" )
-quartz()
-# plot1
-png(filename ="plot1.png", width = 480, height = 480, bg = "transparent")
-with(d1, hist(Global_active_power, col = "red", 
-              main = "Global Active Power",
-              xlab = 'Global Active Power (kilowatts)'))
-dev.off()
-
-# plot2
-plot(d1$DT, d1$Global_active_power, type = "n", 
-     xlab = "",
-     ylab = "Global Active Power (kilowatts)")
-lines(d1$DT, d1$Global_active_power)
-
-# plot3
-plot(d1$DT, d1$Sub_metering_1, type = "n", 
-     xlab = "",
-     ylab = "Energy sub meeting")
-lines(d1$DT, d1$Sub_metering_1)
-lines(d1$DT, d1$Sub_metering_2, col = "red")
-lines(d1$DT, d1$Sub_metering_3, col = "blue")
-legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
-       col = c("black","red", "blue"),
-       lty = c(1,1))
-
-# plot4
+png(filename ="plot4.png", width = 480, height = 480, bg = "transparent")
 par(mfrow = c(2,2))
 plot(d1$DT, d1$Global_active_power, type = "n", 
      xlab = "",
@@ -61,3 +35,4 @@ legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_
 plot(d1$DT, d1$Global_reactive_power, type = "n", 
      xlab = "datetime")
 lines(d1$DT, d1$Global_reactive_power)
+dev.off()
